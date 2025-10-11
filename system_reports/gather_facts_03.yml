@@ -1,0 +1,23 @@
+---
+# October 11 2025
+# Status: works
+- name: Overview as table for all hosts
+  hosts: all
+  gather_facts: true
+
+  vars:
+    # rows as Jinja‑Block
+    rows: |
+      {% for host in groups['all'] %}
+      {{ host }} | {{ hostvars[host].ansible_facts.processor_cores }} cores |
+      {{ hostvars[host].ansible_facts.memtotal_mb }} MiB RAM |
+      {{ hostvars[host].ansible_facts.default_ipv4.address }} IP
+      {% endfor %}
+
+  tasks:
+    - name: ===| OUTPUT |===
+      debug:
+        msg: |
+          Host            | Cores | RAM (MiB) | IPv4
+          -------------------------------------------------
+          {{ rows }}

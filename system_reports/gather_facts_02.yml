@@ -1,0 +1,18 @@
+---
+# October 11 2025
+# Status: works
+- name: gather basic facts (CPU | RAM | IPv4)
+  hosts: all
+  become: true
+  tasks:
+    - name: ===| GATHER FACTS |===
+      setup:
+        filter:
+          - "ansible_processor*"
+          - "ansible_memtotal_mb"
+          - "ansible_default_ipv4"
+      register: my_facts
+
+    - name: ===| OUTPUT |===
+      debug:
+        var: my_facts.ansible_facts

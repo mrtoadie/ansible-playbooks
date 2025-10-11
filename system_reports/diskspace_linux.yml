@@ -1,0 +1,13 @@
+---
+# October 11 2025
+# Status: works
+- name: Check disk space on Linux machines
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: yes
+
+  tasks:
+    - name: Display disk space
+      shell: df -h
+      register: disk_space
+    - debug: var=disk_space.stdout_lines
