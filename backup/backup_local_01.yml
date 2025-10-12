@@ -1,0 +1,28 @@
+---
+- name: Archiv local directory
+  hosts: localhost
+  gather_facts: false
+  vars:
+    src_dir: /home/toadie/Downloads/Projects
+    backup_dir: /home/toadie/Downloads/backups
+    timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+    archive_name: "projekte_{{ timestamp }}.tgz"
+
+  tasks:
+    - name: Directory exists?
+      file:
+        path: "{{ backup_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Directory to >> tar.gz archiv
+      archive:
+        path: "{{ src_dir }}"
+        dest: "{{ backup_dir }}/{{ archive_name }}"
+        format: gz
+        remove: false # Original Verzeichnis nicht löschen
+        mode: "0644"
+
+    - name: ===| FEEDBACK |===
+      debug:
+        msg: "Backup fertig → {{ backup_dir }}/{{ archive_name }}"
