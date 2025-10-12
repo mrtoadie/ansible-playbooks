@@ -1,0 +1,23 @@
+---
+- name: ===| Check running KVM-VMs with virsh |===
+  hosts: localhost
+  become: true # libvirt/virsh query for root or user (true is root)
+  gather_facts: false
+
+  tasks:
+  - name: ===| Execute virsh-command |===
+    command: virsh list --state-running --name
+    register: virsh_output
+    changed_when: false
+
+  - name: ===| ALL RUNNING VMs |===
+    debug:
+      msg: |
+        Laufende VMs auf {{ inventory_hostname }}:
+        {% if virsh_output.stdout_lines %}
+        {% for vm in virsh_output.stdout_lines %}
+          - {{ vm }}
+        {% endfor %}
+        {% else %}
+        (keine laufenden VMs)
+        {% endif %}
