@@ -1,0 +1,9 @@
+---
+ 
+ - hosts: all
+   become: true
+   tasks:
+    - git:
+        repo: https://github.com/ansible/ansible-examples.git
+        dest: /home/toadie/ansible-examples
+        archive: /home/toadie/ansible-examples.zip

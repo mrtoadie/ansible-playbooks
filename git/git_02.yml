@@ -1,0 +1,9 @@
+---
+ 
+ - hosts: all
+   become: true
+   tasks:
+    - git:
+        repo: https://github.com/MrToadie/dev.git
+        dest: /home/toadie/dev
+        separate_git_dir: /home/toadie/dev.git

@@ -1,0 +1,12 @@
+---
+- name: Remote‑Hosts herunterfahren
+  hosts: shutdown                     # oder eine Gruppe, z. B. webservers
+  become: true                    # root‑Rechte für shutdown benötigen
+  gather_facts: false
+
+  tasks:
+    - name: System mit systemd herunterfahren
+      ansible.builtin.systemd:
+        name: poweroff.target
+        state: started            # startet das target → fährt das System herunter
+        enabled: false            # (optional) verhindert automatisches Aktivieren beim Booten

@@ -1,0 +1,11 @@
+---
+- name: Remote‑Hosts mit classic shutdown beenden
+  hosts: shutdown
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Shutdown jetzt (im Moment)
+      ansible.builtin.command: shutdown -h now
+      async: 0                # sofort starten, nicht warten
+      poll: 0                 # nicht blockieren, Ansible kehrt zurück

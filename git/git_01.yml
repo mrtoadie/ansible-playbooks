@@ -1,0 +1,9 @@
+---
+ 
+ - hosts: all
+   become: true
+   tasks:
+    - git:
+        repo: https://github.com/ansible/ansible-examples.git
+        dest: /src/ansible-examples
+        separate_git_dir: /src/ansible-examples.git
