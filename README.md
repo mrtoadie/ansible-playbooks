@@ -6,30 +6,30 @@
 ### Linux
 - **Git**
   - **[Git](https://github.com/mrtoadie/ansible-playbooks/tree/main/git)**
-    - *[git_01.yml]()*
-    - *[git_02.yml]()*
-    - *[git_03.yml]()*
+    - *git_01.yml*
+    - *git_02.yml*
+    - *git_03.yml*
 - **System**
-  - **[Backups]()**
-    - *[backup_local_01.yml]()*
-    - *[backup_local_02.yml]()*
-  - **[Maintenance]()**
-    - *[reboot.yml]()*
-    - *[shutdown_classic.yml]()*
-    - *[shutdown_systemd.yml]()*
-  - **[Monitoring]()**
-    - *[diskspace_linux.yml]()*
-    - *[gather_facts_01.yml]()*
-    - *[gather_facts_02.yml]()*
-    - *[gather_facts_03.yml]()*
-  - **[Updates]()**
-    - *[arch_update.yml]()*
-    - *[centos_update.yml]()*
-    - *[ubuntu_update.yml]()*
+  - **[Backups](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/backups)**
+    - *backup_local_01.yml*
+    - *backup_local_02.yml*
+  - **[Maintenance](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/maintenance)**
+    - *reboot.yml*
+    - *shutdown_classic.yml*
+    - *shutdown_systemd.yml*
+  - **[Monitoring](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/monitoring)**
+    - *diskspace_linux.yml*
+    - *gather_facts_01.yml*
+    - *gather_facts_02.yml*
+    - *gather_facts_03.yml*
+  - **[Updates](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/updates)**
+    - *arch_update.yml*
+    - *centos_update.yml*
+    - *ubuntu_update.yml*
 - **Virtual Machines**
-  - **[KVM]()**
-    - *[check_running_vms_01.yml]()*
-    - *[check_running_vms_02.yml]()*
+  - **[KVM](https://github.com/mrtoadie/ansible-playbooks/tree/main/virtual-machines/kvm)**
+    - *check_running_vms_01.yml*
+    - *check_running_vms_02.yml*
 ---
 
 > [!CAUTION]

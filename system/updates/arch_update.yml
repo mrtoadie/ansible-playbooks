@@ -1,7 +1,7 @@
 ---
 # works
 - name: All hosts up-to-date
-  hosts: all
+  hosts: localhost
   become: true
 
   tasks:
