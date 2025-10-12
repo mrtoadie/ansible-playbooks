@@ -1,35 +1,27 @@
 # ansible-playbooks
 
-> [!NOTE]
+> [!TIP]
 > In some Playbooks, you may need to adjust *paths* / *users* or other *parameters*.
 ## Playbooks
 ### Linux
 - **Git**
   - **[Git](https://github.com/mrtoadie/ansible-playbooks/tree/main/git)**
-    - *git_01.yml*
-    - *git_02.yml*
-    - *git_03.yml*
+    > [!NOTE]
+    > Working with Git repositorys
 - **System**
   - **[Backups](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/backups)**
-    - *backup_local_01.yml*
-    - *backup_local_02.yml*
+    > [!NOTE]
+    > Simple backups with Ansible
   - **[Maintenance](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/maintenance)**
-    - *reboot.yml*
-    - *shutdown_classic.yml*
-    - *shutdown_systemd.yml*
+    > [!NOTE]
+    > Essentinal mantenance like reboot and system updates for various Linux distributions
   - **[Monitoring](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/monitoring)**
-    - *diskspace_linux.yml*
-    - *gather_facts_01.yml*
-    - *gather_facts_02.yml*
-    - *gather_facts_03.yml*
-  - **[Updates](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/updates)**
-    - *arch_update.yml*
-    - *centos_update.yml*
-    - *ubuntu_update.yml*
+    > [!NOTE]
+    > Monitoring like disk usage or gathering some informations about the Nodes
 - **Virtual Machines**
   - **[KVM](https://github.com/mrtoadie/ansible-playbooks/tree/main/virtual-machines/kvm)**
-    - *check_running_vms_01.yml*
-    - *check_running_vms_02.yml*
+    > [!NOTE]
+    > Playbooks for KVM Virtual Machines
 ---
 
 > [!CAUTION]
