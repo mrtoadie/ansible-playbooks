@@ -12,7 +12,7 @@
 | [Maintenance](system/maintenance) | Essentinal mantenance like reboot and system updates for various Linux distributions |
 | [Monitoring](system/monitoring) | Monitoring like disk usage or gathering some informations about the Nodes |
 | **Virtual Machines** | |
-| [KVM](kvm) | Playbooks for KVM Virtual Machines |
+| [KVM](virtual-machines/kvm) | Playbooks for KVM Virtual Machines |
 ---
 
 > [!CAUTION]
