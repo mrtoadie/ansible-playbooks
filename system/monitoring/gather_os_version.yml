@@ -1,0 +1,15 @@
+---
+# October 12 2025
+# Status: works
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: ===| OS-Version |===
+    ansible.builtin.setup:
+      filter: "ansible_distribution*"
+    register: os_facts
+
+  - name: ===| OUTPUT |===
+    debug:
+      msg: |
+        {{ inventory_hostname }} @ {{ os_facts.ansible_facts.ansible_distribution }} | {{ os_facts.ansible_facts.ansible_distribution_version }}

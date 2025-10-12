@@ -1,8 +1,8 @@
 ---
-# October 11 2025
+# October 12 2025
 # Status: works
 - name: Gather Systeminformations
-  hosts: all
+  hosts: localhost
   connection: local
   become: true         
   gather_facts: true
@@ -11,7 +11,7 @@
     - name: ===| OUTPUT |===
       debug:
         msg: |
-          Host: {{ inventory_hostname }}
+          Host: {{ inventory_hostname }} @ {{ ansible_distribution }}
           CPU‑Model: {{ ansible_facts.processor | join(', ') }}
           CPU‑Cores:   {{ ansible_facts.processor_cores }}
           RAM (MB):    {{ ansible_facts.memtotal_mb }}

@@ -6,7 +6,7 @@
 ### Linux
 | Playbooks | Description |
 | --- | --- |
-| **[Git](https://github.com/mrtoadie/ansible-playbooks/tree/main/git)** | Working with Git repositorys |
+| [Git](https://github.com/mrtoadie/ansible-playbooks/tree/main/git) | Working with Git repositorys |
 | **System** | | 
 | [Backups](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/backups) | Simple backups with Ansible |
 | [Maintenance](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/maintenance) | Essentinal mantenance like reboot and system updates for various Linux distributions |
