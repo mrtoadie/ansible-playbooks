@@ -6,13 +6,13 @@
 ### Linux
 | Playbooks | Description |
 | --- | --- |
-| [Git](https://github.com/mrtoadie/ansible-playbooks/tree/main/git) | Working with Git repositorys |
+| [Git](git) | Working with Git repositorys |
 | **System** | | 
-| [Backups](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/backups) | Simple backups with Ansible |
-| [Maintenance](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/maintenance) | Essentinal mantenance like reboot and system updates for various Linux distributions |
-| [Monitoring](https://github.com/mrtoadie/ansible-playbooks/tree/main/system/monitoring) | Monitoring like disk usage or gathering some informations about the Nodes |
+| [Backups](system/backups) | Simple backups with Ansible |
+| [Maintenance](system/maintenance) | Essentinal mantenance like reboot and system updates for various Linux distributions |
+| [Monitoring](system/monitoring) | Monitoring like disk usage or gathering some informations about the Nodes |
 | **Virtual Machines** | |
-| [KVM](https://github.com/mrtoadie/ansible-playbooks/tree/main/virtual-machines/kvm) | Playbooks for KVM Virtual Machines |
+| [KVM](kvm) | Playbooks for KVM Virtual Machines |
 ---
 
 > [!CAUTION]
