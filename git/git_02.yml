@@ -4,6 +4,6 @@
    become: true
    tasks:
     - git:
-        repo: https://github.com/MrToadie/dev.git
-        dest: /home/toadie/dev
-        separate_git_dir: /home/toadie/dev.git
+        repo: https://github.com/mrtoadie/ansible-playbooks.git
+        dest: /tmp
+        separate_git_dir: /tmp/ansible-playbooks.git

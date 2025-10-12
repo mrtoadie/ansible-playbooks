@@ -4,6 +4,6 @@
    become: true
    tasks:
     - git:
-        repo: https://github.com/ansible/ansible-examples.git
-        dest: /home/toadie/ansible-examples
-        archive: /home/toadie/ansible-examples.zip
+        repo: https://github.com/mrtoadie/ansible-playbooks.git
+        dest: /tmp/ansible-playbooks
+        archive: /tmp/ansible-playbooks.zip
