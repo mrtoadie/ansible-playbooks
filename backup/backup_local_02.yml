@@ -1,0 +1,29 @@
+---
+- name: ===| Archiv more than one local directory |===
+  hosts: localhost
+  gather_facts: false
+  vars:
+    local_user: "{{ lookup('env', 'USER') }}"
+    src_dir: "/home/{{ local_user }}/Downloads/Projects"
+    backup_dir: "/home/{{ local_user }}/Downloads/backups"
+    timestamp: "{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}"
+    archive_name: "projekte_{{ timestamp }}.tgz"
+
+  tasks:
+  - name: ===| Directory exists? |===
+    file:
+      path: "{{ backup_dir }}"
+      state: directory
+      mode: "0755"
+
+  - name: ===| Directorys to >> tar.gz archives |===
+    archive:
+      path: "{{ src_dir }}"
+      dest: "{{ backup_dir }}/{{ archive_name }}"
+      format: gz
+      remove: false # Keep original directory
+      mode: "0644"
+
+  - name: ===| FEEDBACK |===
+    debug:
+      msg: "Backup fertig → {{ backup_dir }}/{{ archive_name }}"

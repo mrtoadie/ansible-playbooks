@@ -1,5 +1,5 @@
 ---
-- name: Archiv local directory
+- name: ===| Archiv local directory |===
   hosts: localhost
   gather_facts: false
   vars:
@@ -9,20 +9,20 @@
     archive_name: "projekte_{{ timestamp }}.tgz"
 
   tasks:
-    - name: Directory exists?
+    - name: ===| Directory exists? |===
       file:
         path: "{{ backup_dir }}"
         state: directory
         mode: "0755"
 
-    - name: Directory to >> tar.gz archiv
+    - name: ===| Directory to >> tar.gz archiv |===
       archive:
         path: "{{ src_dir }}"
         dest: "{{ backup_dir }}/{{ archive_name }}"
         format: gz
-        remove: false # Original Verzeichnis nicht löschen
+        remove: false # Keep original directory
         mode: "0644"
 
     - name: ===| FEEDBACK |===
       debug:
-        msg: "Backup fertig → {{ backup_dir }}/{{ archive_name }}"
+        msg: "Backup completed → {{ backup_dir }}/{{ archive_name }}"
