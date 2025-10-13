@@ -1,5 +1,5 @@
 # Ansible Playbooks
-Some Ansible Playbooks for inspiration and everyday use ;)
+Some Ansible Playbooks for inspiration and everyday use :smirk:
 > [!TIP]
 > In some Playbooks, you may need to adjust *paths* / *users* or other *parameters*.
 ## Playbooks
