@@ -6,7 +6,7 @@
 ### Linux
 | Playbooks | Description |
 | --- | --- |
-| [arch(arch)] | Arch Linux related Playbooks
+| [Arch Linux](archlinux) | Arch Linux related Playbooks
 | [Git](git) | Working with Git repositorys |
 | **System** | | 
 | [Backups](system/backups) | Simple backups with Ansible |
