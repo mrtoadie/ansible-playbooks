@@ -1,5 +1,5 @@
-# ansible-playbooks
-
+# Ansible Playbooks
+Some Ansible Playbooks for inspiration and everyday use ;)
 > [!TIP]
 > In some Playbooks, you may need to adjust *paths* / *users* or other *parameters*.
 ## Playbooks
@@ -22,5 +22,6 @@
 
 > [!CAUTION]
 > For **safety**, you should never test Playbooks on a productive system!
+
 
 [![wakatime](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks.svg)](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks)
