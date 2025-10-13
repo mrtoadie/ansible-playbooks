@@ -1,0 +1,11 @@
+---
+# works
+- name: All hosts up-to-date
+  hosts: arch
+  become: true
+
+  tasks:
+  - name: ===| Full system upgrade (pacman -Syu) |===
+    community.general.pacman:
+      update_cache: true
+      upgrade: true

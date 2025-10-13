@@ -1,0 +1,23 @@
+---
+- hosts: arch
+  #connection: local # When running locally
+  remote_user: toadie
+  become: yes
+  vars:
+    package_names:
+    - mc
+    - btop
+    - vlc
+    - gimp
+    - vscode
+  tasks:
+  # - name: Full system upgrade
+  #   community.general.pacman:
+  #     update_cache: true
+  #     upgrade: false
+
+  - name: Install package if not present Arch
+    pacman:
+      name: "{{ item }}"
+      state: present
+    loop: "{{ package_names }}"

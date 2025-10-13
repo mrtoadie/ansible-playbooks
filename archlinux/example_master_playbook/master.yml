@@ -1,0 +1,4 @@
+---
+- import_playbook: ../pacman/update.yml
+- import_playbook: ../pacman/install_basic_tools.yml
+#- import_playbook: create_file.yml
