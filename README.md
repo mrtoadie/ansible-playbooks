@@ -10,6 +10,7 @@ Some Ansible Playbooks for inspiration and everyday use :smirk:
 | [Arch Linux](archlinux) | Arch Linux related Playbooks |
 | CentOS | comming soon |
 | Ubuntu | comming soon |
+| Generic Linux | |
 | **Dev** | |
 | [Git](git) | Working with Git repositorys |
 | **System** | | 
