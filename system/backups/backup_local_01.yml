@@ -1,5 +1,5 @@
 ---
-- name: ===| Archiv local directory |===
+- name: ===| Archiv local directory @ {{ inventory_hostname }} |===
   hosts: localhost
   gather_facts: false
   vars:

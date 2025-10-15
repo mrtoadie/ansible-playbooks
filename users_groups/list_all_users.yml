@@ -1,0 +1,17 @@
+---
+- name: ===| Gather all local users |===
+  hosts: arch          # z. B. "all" oder ein Inventar‑Alias
+  become: true                     # benötigt root‑Rechte, um /etc/passwd zu lesen
+  gather_facts: false              # Fakten nicht nötig für diese Aufgabe
+
+  tasks:
+    - name: ===| Get all users with 'getent & passwd' |=== 
+      command: getent passwd
+      register: user_list
+
+    - name: ===| ALL USERS @ {{ inventory_hostname }} |===
+      debug:
+        msg: "{{ user_list.stdout_lines |
+                map('split', ':') |
+                map('first') |
+                list }}"
