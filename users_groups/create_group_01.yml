@@ -1,0 +1,10 @@
+---
+- name: User creation testing
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Create an new group
+    ansible.builtin.group:
+      name: entenhausen
+      state: present

@@ -1,0 +1,26 @@
+---
+- name: User creation testing
+  hosts: all
+  vars:
+    user1: bob
+    user1_name: Bob Tangel
+    user2: donald
+    user2_name: Donald Duck
+  become: yes
+
+  tasks:
+  - name: User creation for {{ user1 }}
+    ansible.builtin.user:
+      name: "{{ user1 }}"
+      comment: "{{ user1_name }}"
+      shell: /bin/zsh
+      system: no
+      create_home: yes
+      state: present
+
+  - name: User creation for {{ user2 }}
+    ansible.builtin.user:
+      name: "{{ user2 }}"
+      comment: "{{ user2_name }}"
+      create_home: yes
+      state: present
