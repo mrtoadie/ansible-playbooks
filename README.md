@@ -17,6 +17,7 @@ Some Ansible Playbooks for inspiration and everyday use :smirk:
 | [Backups](system/backups) | Simple backups with Ansible |
 | [Maintenance](system/maintenance) | Essentinal mantenance like reboot and system updates for various Linux distributions |
 | [Monitoring](system/monitoring) | Monitoring like disk usage or gathering some informations about the Nodes |
+| [Users & Groups](users-groups) | Playbooks to manage Users & Groups |
 | **Virtual Machines** | |
 | [KVM](virtual-machines/kvm) | Playbooks for KVM Virtual Machines |
 ---
