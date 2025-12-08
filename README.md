@@ -1,4 +1,7 @@
 # Ansible Playbooks
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/mrtoadie/ansible-playbooks/main)
+
+
 Some Ansible Playbooks for inspiration and everyday use :smirk:
 > [!TIP]
 > In some Playbooks, you may need to adjust *paths* / *users* or other *parameters*.
