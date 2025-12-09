@@ -1,4 +1,7 @@
 # Ansible Playbooks
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/mrtoadie/ansible-playbooks/main)
+[![wakatime](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks.svg)](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks)
+
 Some Ansible Playbooks for inspiration and everyday use :smirk:
 > [!TIP]
 > In some Playbooks, you may need to adjust *paths* / *users* or other *parameters*.
@@ -24,3 +27,6 @@ Some Ansible Playbooks for inspiration and everyday use :smirk:
 
 > [!CAUTION]
 > For **safety**, you should never test Playbooks on a productive system!
+
+---
+[![wakatime](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks.svg)](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks)
