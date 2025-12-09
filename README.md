@@ -27,6 +27,3 @@ Some Ansible Playbooks for inspiration and everyday use :smirk:
 
 > [!CAUTION]
 > For **safety**, you should never test Playbooks on a productive system!
-
----
-[![wakatime](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks.svg)](https://wakatime.com/badge/github/mrtoadie/ansible-playbooks)
