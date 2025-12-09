@@ -1,5 +1,5 @@
 # Ansible Playbooks
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/mrtoadie/ansible-playbooks/total) ![GitHub License](https://img.shields.io/github/license/mrtoadie/ansible-playbooks) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/mrtoadie/ansible-playbooks/main)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/mrtoadie/ansible-playbooks/total) ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/mrtoadie/ansible-playbooks/main)
 
 
 Some Ansible Playbooks for inspiration and everyday use :smirk:
