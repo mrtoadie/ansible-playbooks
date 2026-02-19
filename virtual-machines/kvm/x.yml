@@ -1,0 +1,19 @@
+---
+- name: Ensure a KVM VM exists and is running
+  hosts: localhost
+  become: true                     # libvirt braucht root‑Rechte
+  gather_facts: false
+
+  vars:
+    vm_name: Arch
+    vm_image_path: /run/media/toadie/vm/QEMU/arcolinux.qcow2
+
+- name: Check whether the VM is already defined
+  ansible.builtin.command: virsh dominfo "{{ vm_name }}"
+  register: dominfo
+  ignore_errors: true
+
+- name: Fail if the VM does not exist at all
+  ansible.builtin.fail:
+    msg: "VM '{{ vm_name }}' ist nicht definiert – bitte erst definieren."
+  when: dominfo.rc != 0

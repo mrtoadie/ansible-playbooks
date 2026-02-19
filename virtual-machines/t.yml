@@ -1,0 +1,168 @@
+---
+- name: KVM‑VM starten, updaten und wieder herunterfahren
+  hosts: localhost                     # Wir steuern den Hypervisor von hier aus
+  become: true                         # libvirt‑Operationen brauchen root
+  vars:
+    # -------------------------------------------------
+    # 1️⃣ VM‑Definition (passt zu deiner Umgebung)
+    # -------------------------------------------------
+    vm_name:          Arch        # Name der VM, wie in libvirt definiert
+    vm_image_path:    /run/media/toadie/vm/QEMU/arcolinux.qcow2
+    vm_memory_mb:     2048
+    vm_vcpu:          2
+    vm_os_variant:    archlinux
+    vm_network:       default            # libvirt‑Standard‑Brücke
+    # -------------------------------------------------
+    # 2️⃣ SSH‑Zugang zur VM (wird nach dem Start benutzt)
+    # -------------------------------------------------
+    vm_ssh_user:      ubuntu
+    vm_ssh_private_key: ~/.ssh/id_rsa_demo_vm   # Pfad zu deinem privaten Schlüssel
+    vm_ip:            "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"  # placeholder – wird später überschrieben
+  tasks:
+
+    # -----------------------------------------------------------------
+    # 0️⃣ Sicherstellen, dass das libvirt‑Python‑Binding vorhanden ist
+    # -----------------------------------------------------------------
+    - name: Install libvirt Python bindings (Debian/Ubuntu hosts)
+      ansible.builtin.package:
+        name: python3-libvirt
+        state: present
+      when: ansible_facts['os_family'] == 'Debian'
+
+    # -----------------------------------------------------------------
+    # 1️⃣ VM definieren (falls sie noch nicht existiert)
+    # -----------------------------------------------------------------
+    - name: Define (oder aktualisieren) die VM
+      community.libvirt.virt:
+        command: define
+        name: "{{ vm_name }}"
+        memory: "{{ vm_memory_mb * 1024 }}"   # KiB
+        vcpus: "{{ vm_vcpu }}"
+        disk:
+          - name: "{{ vm_image_path }}"
+            device: disk
+            type: file
+            bus: virtio
+        network_interface:
+          - network: "{{ vm_network }}"
+            type: network
+        os_variant: "{{ vm_os_variant }}"
+        graphics:
+          type: none
+        boot:
+          devices:
+            - hd
+        state: present
+
+    # -----------------------------------------------------------------
+    # 2️⃣ VM starten (falls sie gestoppt ist)
+    # -----------------------------------------------------------------
+    - name: Start the VM (if not already running)
+      community.libvirt.virt:
+        command: start
+        name: "{{ vm_name }}"
+
+    # -----------------------------------------------------------------
+    # 3️⃣ Auf die IP-Adresse der VM warten (virsh‑DHCP‑Lease‑Abfrage)
+    # -----------------------------------------------------------------
+    - name: Wait for the VM to acquire an IP address via DHCP
+      community.libvirt.virt:
+        command: list_vms
+      register: vm_list
+
+    - name: Retrieve the VM's MAC address
+      community.libvirt.virt:
+        command: dumpxml
+        name: "{{ vm_name }}"
+      register: vm_xml
+
+    - name: Extract MAC from XML (using xmltodict filter)
+      ansible.builtin.set_fact:
+        vm_mac: "{{ vm_xml.xml | regex_search('mac address=\"([^\"]+)\"', '\\1') }}"
+
+    - name: Wait until the VM appears in the libvirt DHCP lease table
+      ansible.builtin.wait_for:
+        timeout: 120
+        sleep: 5
+        state: started
+        port: 22               # dummy – wir prüfen später per ping
+      delegate_to: localhost
+      when: false   # placeholder – we’ll replace with a loop below
+
+    - name: Get the VM's IP from the libvirt lease file
+      ansible.builtin.command: >
+        virsh net-dhcp-leases {{ vm_network }} --mac {{ vm_mac }}
+      register: dhcp_lease
+      retries: 10
+      delay: 6
+      until: dhcp_lease.stdout != ""
+
+    - name: Parse IP from lease output
+      ansible.builtin.set_fact:
+        vm_ip: "{{ dhcp_lease.stdout | regex_search('ipv4 ([0-9.]+)', '\\1') }}"
+
+    - name: Debug – show discovered IP
+      ansible.builtin.debug:
+        msg: "VM {{ vm_name }} hat IP {{ vm_ip }}"
+
+    # -----------------------------------------------------------------
+    # 4️⃣ SSH‑Verbindung zur VM herstellen (temporärer Inventory‑Eintrag)
+    # -----------------------------------------------------------------
+    - name: Add the VM to a temporary in‑memory inventory group
+      add_host:
+        name: "{{ vm_name }}_guest"
+        groups: vm_guest
+        ansible_host: "{{ vm_ip }}"
+        ansible_user: "{{ vm_ssh_user }}"
+        ansible_ssh_private_key_file: "{{ vm_ssh_private_key }}"
+        ansible_python_interpreter: /usr/bin/python3
+
+    # -----------------------------------------------------------------
+    # 5️⃣ Auf die VM warten, bis SSH erreichbar ist
+    # -----------------------------------------------------------------
+    - name: Wait for SSH to become reachable
+      ansible.builtin.wait_for:
+        host: "{{ vm_ip }}"
+        port: 22
+        timeout: 180
+        state: started
+      delegate_to: localhost
+
+    # -----------------------------------------------------------------
+    # 6️⃣ Aktualisieren der VM (innerhalb des neuen Host‑Blocks)
+    # -----------------------------------------------------------------
+    - name: Update packages inside the VM
+      ansible.builtin.shell: |
+        sudo apt-get update -qq && sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -qq
+      args:
+        warn: false
+      become: true
+      become_user: root
+      delegate_to: "{{ vm_name }}_guest"
+      # optional: register result, notify on failure, etc.
+
+    # -----------------------------------------------------------------
+    # 7️⃣ Sauberes Herunterfahren der VM
+    # -----------------------------------------------------------------
+    - name: Initiate graceful shutdown via SSH
+      ansible.builtin.command: sudo shutdown -h now
+      async: 0
+      poll: 0
+      ignore_errors: true
+      delegate_to: "{{ vm_name }}_guest"
+
+    - name: Wait until the VM is reported as stopped by libvirt
+      community.libvirt.virt:
+        command: status
+        name: "{{ vm_name }}"
+      register: vm_status
+      until: vm_status.state == "shut off"
+      retries: 15
+      delay: 8
+
+    - name: Optional – undefine the VM (clean‑up)
+      community.libvirt.virt:
+        command: undefine
+        name: "{{ vm_name }}"
+        # keep_disk: yes   # <-- set to no if you also want to delete the disk
+      when: false   # set to true if you really want to remove the definition

@@ -1,0 +1,21 @@
+---
+- name: Check / start a KVM VM with virsh
+  hosts: localhost                # Wir arbeiten vom Hypervisor‑Host aus
+  become: false                    # libvirt‑Operationen benötigen root‑Rechte
+  gather_facts: false
+
+  vars:
+    vm_name: Arch
+    vm_image_path:    /run/media/toadie/vm/QEMU/arcolinux.qcow2
+
+  tasks:
+    - name: Start the VM (if not already running)
+      community.libvirt.virt:
+        name: "{{ vm_name }}"
+        state: running
+      register: start_result
+
+    - name: Show what happened
+      ansible.builtin.debug:
+        msg: >-
+          VM "{{ vm_name }}" {{ 'started' if start_result.changed else 'was already running' }}.
